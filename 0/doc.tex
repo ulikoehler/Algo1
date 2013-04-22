@@ -1,0 +1,73 @@
+\documentclass[a4paper,12pt,leqno]{scrartcl}
+\usepackage{listingsutf8}
+\usepackage[pdftex]{graphicx}
+\usepackage[ngerman]{babel}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} %Latin modern = enhanced CM font
+\usepackage{xspace} %Space enhancements
+\usepackage[tracking=true,activate={true,nocompatibility},babel=true]{microtype} %PDFTeX typography enhancements
+\usepackage{fixltx2e}
+\usepackage{color}
+\usepackage{array}
+\usepackage{float} %Configure figure floats to be boxed
+  \floatstyle{boxed}
+  \restylefloat{figure}
+
+\setlength{\parindent}{0mm}
+
+\newcommand{\textrightarrow}{$\rightarrow$}
+
+
+\lstset{
+   basicstyle=\scriptsize\ttfamily,
+   keywordstyle=\bfseries\ttfamily\color{blue},
+   stringstyle=\color{orange}\ttfamily,
+   commentstyle=\color{green}\ttfamily,
+   emph={square}, 
+   emphstyle=\color{blue}\texttt,
+   emph={[2]root,base},
+   emphstyle={[2]\color{yac}\texttt},
+   showstringspaces=false,
+   flexiblecolumns=false,
+   tabsize=2,
+   numbers=left,
+   numberstyle=\tiny,
+   numberblanklines=false,
+   stepnumber=1,
+   numbersep=10pt,
+   xleftmargin=15pt,
+   language=Java
+ }
+
+
+\definecolor{middlegray}{rgb}{0.5,0.5,0.5}
+\definecolor{lightgray}{rgb}{0.8,0.8,0.8}
+\definecolor{orange}{rgb}{0.8,0.3,0.3}
+\definecolor{yac}{rgb}{0.6,0.6,0.1}
+
+
+\begin{document}
+%% DO NOT ALTER UNLESS YOU KNOW EXACTLY WHAT YOURE DOING
+{\scriptsize
+\noindent\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lr}
+& Uli Köhler (10580373)\\
+& Tobias Harrer (XXXXXX)
+\end{tabular*}
+}
+\\
+\begin{center}
+\large 0. Übung zur Vorlesung\\
+\Huge Algorithmische Bioinformatik 1
+\end{center}\vspace{1cm}
+%% END OF DO NOT ALTER
+%% Add the main content here
+\section*{Aufgabe 1:}
+\section*{Aufgabe 2:}
+
+\end{document}
