@@ -68,6 +68,32 @@
 %% END OF DO NOT ALTER
 %% Add the main content here
 \section*{Aufgabe 1:}
+\subsection*{(a)}
+Induktionsanfang: $n = k$\\
+\begin{align*}
+\sum^n_{i=k} \binom{i}{k} &= \binom{n+1}{k+1}\\
+\binom{k}{k} &= \binom{n+1}{k+1}\\
+\text{Da n $\geq$ k:}\\
+\frac{k!}{k!\cdot (k-k)!} &= \frac{(k+1)!}{(k+1)!\cdot [(k+1)-(k+1)]!}\\
+\frac{k!}{k!\cdot 0!} &= \frac{(k+1)!}{(k+1)!\cdot 0!}\\
+\frac{1}{1\cdot 0} &= \frac{1}{1\cdot 0}\ q.e.d
+\end{align*}
+
+\paragraph{Induktionsfortsetzung:}
+Die Linke Seite der zu zeigenden Gleichung sei im Folgenden definiert als $L_k(n)$.
+Analog sei die rechte Seite definiert als $R_k(n)$\\
+
+Zu zeigen ist daher $L_k(n+1) = R_k(n+1)$, sofern $L_k(n) = R_k(n)$ gilt.
+
+Es gilt:
+\begin{align*}
+L_k(n+1) &= L_k(n) + \binom{n+2}{k+1}\\
+R_k(n+1) &= \frac{(n+2)!}{k!\cdot [(n+2)-k]!}\\
+&= \frac{n!\cdot (n+1)}{k!\cdot [(n+1)-k]!\cdot [(n+2)-k]\\
+\end{align*}
+
+Da gilt $L_k(n) = R_k(n) = $
+
 \section*{Aufgabe 2:}
 
 \end{document}
