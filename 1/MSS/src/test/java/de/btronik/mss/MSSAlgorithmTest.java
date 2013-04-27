@@ -25,7 +25,7 @@ public class MSSAlgorithmTest {
         MSSResult result = algorithm.calculate(data);
         assertEquals(0, result.startIndex);
         assertEquals(2, result.endIndex);
-        assertEquals(8, result.score);
+        assertEquals(8, result.score, 0.0000001);
     }
 
     public MSSAlgorithmTest() {
