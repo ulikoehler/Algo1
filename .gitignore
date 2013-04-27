@@ -30,3 +30,5 @@
 *.vrb
 *.xdy
 *.tdo
+/1/MSS/nbproject/private/
+/1/MSS/target/
