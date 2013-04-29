@@ -48,17 +48,17 @@ public class MSSAlgorithmTest {
     }
 
     @Test
-    void testNaive() {
+    public void testNaive() {
         test(new NaiveAlgorithm());
     }
 
     @Test
-    void testLinear() {
+    public void testLinear() {
         test(new LinearAlgorithm());
     }
 
     @Test
-    void testOther() {
-        test(new DynamicAlgorithm());
+    public void testOther() {
+        test(new RecursiveAlgorithm());
     }
 }
