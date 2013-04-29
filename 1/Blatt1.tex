@@ -39,8 +39,12 @@ begin\\
 \> \>\textbf{if (rmaxscore $\geq$ maxscore) then}\\
 \> \> \> maxscore := rmaxscore; \\ \> \> \> \textbf{lStart[MSScounter] := rstart;}\\ \> \> \> \textbf{rEnd[MSScounter] := i;}\\
 \> \> \>  \textbf{MSScounter++;}\\
-end 
+end
 \end{tabbing}
+Die Laufzeit bleibt bei $\mathcal{O}(n)$, da nur in der letzten Fallunterscheidung 3 Operationen
+hinzukommen, die in konstanter Laufzeit geschehen (Schreiben in Array, Addieren zu einem Integer). Werden hingegen lStart und rEnd
+als Listen implementiert, benötigt das Hinzufügen zur Liste lineare Laufzeit, die Gesamtlaufzeit würde in $\mathcal{O}(n^2)$ liegen.
+
 
 \section{Aufgabe 3}
 Die Einträge sind die Eingabegrößen, die der jeweilige Algorithmus in der jeweiligen Zeit bewältigt:\newline
