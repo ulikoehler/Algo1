@@ -43,13 +43,32 @@ end
 \end{tabbing}
 
 \section{Aufgabe 3}
+Die Einträge sind die Eingabegrößen, die der jeweilige Algorithmus in der jeweiligen Zeit bewältigt:\newline
  \begin{tabular}{lccccr}
    & 1s & 60s & 3,600s & 86,400s & 2,592,000s \\
-  T1 & 2 &120 &	7,200 &	172,800 &5,184,000 \\
-  T2&$\approx$7&$\approx$164&$\approx$5,763&$\approx$103,700 &$\approx$2,445,000\\
-  T3&$\approx$32&$\approx$245&$\approx$1,897&$\approx$9,295&$\approx$50,912\\
-  T4&$\approx$46&$\approx$182&$\approx$711&$\approx$2,052&$\approx$6,376\\
-  T5&$\approx$13&$\approx$16&$\approx$20&$\approx$23&$\approx$26\\
+  $T_1$ & 2 &120 &	7,200 &	172,800 &5,184,000 \\
+  $T_2$&$\approx$7&$\approx$164&$\approx$5,763&$\approx$103,700 &$\approx$2,445,000\\
+  $T_3$&$\approx$32&$\approx$245&$\approx$1,897&$\approx$9,295&$\approx$50,912\\
+  $T_4$&$\approx$46&$\approx$182&$\approx$711&$\approx$2,052&$\approx$6,376\\
+  $T_5$&$\approx$13&$\approx$16&$\approx$20&$\approx$23&$\approx$26\\
  \end{tabular}
+\newline Die Einträge wurden folgendermaßen berechnet (z.B. 1s, $T_1$):\newline
+$1s * 1000* \frac{1}{s} = 500 * n \Leftrightarrow n = 2$
+
+\section{Aufgabe 4}
+\subsection{Algorithmen mit polynomieller Laufzeit:}
+Da $T_1$ linear wächst ($T_1 \in \mathcal{O}(n)$), kann auch die Eingabegröße um das 100-fache steigen.\newline $T_3$ wächst quadratisch
+($T_1 \in \mathcal{O}(n^2)$), daher kann bei 100-facher Eingabegröße die Eingabe um das $\sqrt{100} = 10$-fache steigen. \newline $T_4 \in \mathcal{O}(n^3)$,
+daher kann die Eingabegröße um das $\sqrt[3]{100} \approx 4.6$-fache steigen.\newline
+Die Steigerung der Eingabegröße kann mithilfe der x-ten Wurzel berechnet werden, da sich die Eingabegröße folgendermaßen errechnet:\newline
+$t*o = a*n^x \Leftrightarrow n = \sqrt[x]{\frac{t*o}{a}}$ (o = Elementaroperationen pro Sekunde). Dabei handelt es sich um die jeweilige
+Umkehrfunktion.
+
+\subsection{Algorithmen mit exponentieller Laufzeit:}
+$t*o = a*x^n \Leftrightarrow n = \log_x(\frac{t*o}{a})$ \newline
+Werden die Elementaroperationen pro Sekunde verhundertfacht, so wird auch das Argument des Logarithmus mit dem 100-fachen multipliziert.
+Des weiteren gilt:\newline
+$\log(a*b) = \log(a) + \log(b)$. Da in diesem Fall durch das Verhundertfachen der Rechenleistung lediglich das Argument des 
+Logarithmus beeinflusst wird, können folglich konstant zusätzlich $\log_3(100) \approx 4$ Operationen zusätzlich ausgeführt werden.
 
 \end{document}
