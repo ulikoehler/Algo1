@@ -1,7 +1,10 @@
 package de.btronik.mss;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -13,13 +16,20 @@ import org.apache.commons.io.FileUtils;
  */
 public class App {
     //Predicate that returns true for non-comment lines
-    private static final Predicate<String> commentFilter = new Predicate<String>() {
 
+    private static final Predicate<String> commentFilter = new Predicate<String>() {
         @Override
         public boolean apply(String t) {
             return !(t.trim().startsWith("#"));
         }
     };
+    private static final Function<String, Double> stringToDouble = new Function<String, Double>() {
+        @Override
+        public Double apply(String input) {
+            return Double.parseDouble(input);
+        }
+    };
+
     public static void main(String[] args) {
         try {
             //Parse the arguments
@@ -55,6 +65,10 @@ public class App {
             //Filter out comments
             lines = Collections2.filter(lines, commentFilter);
             //For each (non-comment) line, execute the algorithm
+            for (String line : lines) {
+                Collection<String> stringData = Lists.newLinkedList(Splitter.on('\t').split(line));
+                Collection<Double> data = Collections2.transform(stringData, stringToDouble);
+            }
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.err.println("Error: Missing required arguments (argument count too small). Did you forget to include the totally irrelevant '3' argument?");
             System.err.println("Usage: java -jar ukth_blatt01.jar 3 -i <Inputfile> [-n|-l|-w]");
