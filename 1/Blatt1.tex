@@ -71,4 +71,9 @@ Des weiteren gilt:\newline
 $\log(a*b) = \log(a) + \log(b)$. Da in diesem Fall durch das Verhundertfachen der Rechenleistung lediglich das Argument des 
 Logarithmus beeinflusst wird, können folglich konstant zusätzlich $\log_3(100) \approx 4$ Operationen zusätzlich ausgeführt werden.
 
+\subsection{Algorithmen mit logarithmischer Laufzeit:}
+$T_2(n) = n*\log(n) = \log(n^n)$ (da: $\log(a*b) = \log(a) + \log(b)$).\newline
+Dann gilt: $x = log_2(n^n) \Leftrightarrow n^n = 2^x \Leftrightarrow n = \sqrt[n]{2^x}$. Da n auf beiden Seiten der Gleichung steht,
+ist die Lösung nicht ohne Weiteres ersichtlich.
+
 \end{document}
