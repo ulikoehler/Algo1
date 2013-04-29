@@ -1,0 +1,47 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listingsutf8}
+\usepackage[pdftex]{graphicx}
+\usepackage[ngerman]{babel}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} %Latin modern = enhanced CM font
+\usepackage{xspace} %Space enhancements
+
+%opening
+\title{Übungsblatt 1}
+\author{Uli Köhler (10580373), Tobias Harrer (10575835)}
+
+\begin{document}
+
+\maketitle
+
+\section{Aufgabe 2}
+Idee: Erweiterung des 'Cleveren Algorithmus', sodass in der letzten Fallunterscheidung auch rMaxScores zugelassen werden,
+die gleichgroß wie der bestehende maxScore sind. Die Start- und Endpositionen jedes weiteren maxScore werden in einer Liste gespeichert:
+\newline
+\begin{tabbing}
+MSS \= Clever (int[] a, int n)\\
+begin\\
+\>int maxscore   := 0;\\
+\>int rmaxscore  := 0; rstart := 1;\\
+\>\textbf{int[] lStart; int[] rEnd; int MSScounter := 0;}\\
+\>for \= (i := 1; i $\leq$ n; i++) do\\
+\> \>if \=(rmaxscore > 0) then\\
+\> \> \>rmaxscore := rmaxscore + a[i];\\
+\> \> else \= \\
+\> \> \>rmaxscore := a[i]; rstart := i;\\
+\> \>\textbf{if (rmaxscore $\geq$ maxscore) then}\\
+\> \> \> maxscore := rmaxscore; \\ \> \> \> \textbf{lStart[MSScounter] := rstart;}\\ \> \> \> \textbf{rEnd[MSScounter] := i;}\\
+\> \> \>  \textbf{MSScounter++;}\\
+end 
+\end{tabbing}
+
+
+
+\end{document}
