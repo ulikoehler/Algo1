@@ -61,8 +61,8 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>de.bioinformatikmuenchen.pg4.alignment.AlignmentMain</mainClass>
-                            <packageName>de.bioinformatikmuenchen.pg4.alignment</packageName>
+                            <mainClass>mss.App</mainClass>
+                            <packageName>mss</packageName>
                         </manifest>
                     </archive>
                     <includeBaseDirectory>false</includeBaseDirectory>
