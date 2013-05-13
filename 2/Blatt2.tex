@@ -13,7 +13,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern} %Latin modern = enhanced CM font
 \usepackage{xspace} %Space enhancements
-\usepackage{algorithm}
+%\usepackage{algorithm}
 %opening
 \title{Übungsblatt 1}
 \author{Uli Köhler (10580373), Tobias Harrer (10575835)}
@@ -24,23 +24,50 @@
 \section{Aufgabe 1}
 Binäre Suche:\newline
 
-boolean FIND(int[] array, int wanted) {
-        int curPos = (int) Math.ceil(array.length / 2);
-        for (int i = 0; i <= Math.ceil(Math.log(array.length) / Math.log(2)); i++) {
-            if (array[curPos] == wanted) {
-                return true;
-            } else if (wanted < array[curPos]) {
-                curPos -= (int) Math.ceil(array.length / (Math.pow(2, i + 2)));
-            } else {
-                curPos += (int) Math.ceil(array.length / (Math.pow(2, i + 2)));
-            }
-            curPos = (curPos < 0) ? 0 : curPos;
-            curPos = (curPos >= array.length) ? array.length - 1 : curPos;
-        }
-        return false;
-    }
+boolean FIND(int[] array, int wanted) \{\newline
+        int curPos = (int) Math.ceil(array.length / 2);\newline
+        for (int i = 0; i <= Math.ceil(Math.log(array.length) / Math.log(2)); i++) \{\newline
+            if (array[curPos] == wanted) \{\newline
+                return true;\newline
+            \} else if (wanted < array[curPos]) \{\newline
+                curPos -= (int) Math.ceil(array.length / (Math.pow(2, i + 2)));\newline
+            \} else \{\newline
+                curPos += (int) Math.ceil(array.length / (Math.pow(2, i + 2)));\newline
+            \}\newline
+            curPos = (curPos < 0) ? 0 : curPos;\newline
+            curPos = (curPos >= array.length) ? array.length - 1 : curPos;\newline
+        \}\newline
+        return false;\newline
+    	\}\newline
+    	
+\begin{bfseries}Eingabegröße:\end{bfseries}\newline
+Die Eingabegröße hängt von  der zum einen von der Größe des Arrays ab und von der
+Beschaffenheit der Array-Elemente, z.B. benötigen i.A. n Zahlen weniger Speicher
+als n Strings.
+
+\begin{bfseries}Charakteristische Operation:\end{bfseries}\newline
+Die charakteristische Operation ist der Vergleich eines beleibigen Elements $A_i$ des Arrays mit dem gesuchten $x$.
+Der Aufruf von $A_i$ und der Vergleich benötigen jeweils konstante Zeit. Diese Operationen werden maximal
+$\lceil log_{2}(n)\rceil$ mal durchgeführt, wobei $n$ die Länge des Arrays ist.
+
+\begin{bfseries}Korrektheit:\end{bfseries}\newline
+Durch bis zu $\lceil log_{2}(n)\rceil$-maliges ``halbieren'' des Arrays kann jedes Element, das darin enthalten ist,
+gefunden werden. Dies folgt daraus, dass die Menge gemäß einer totalen Ordnung sortiert ist. Bei jeder Halbierung wird
+das Intervall des Aufenthaltsorts des gesuchten Elements weiter eingeschränkt. Es kann sich nicht außerhalb der
+jeweils gewählten Hälfte befinden, da die <-Relation dies nicht zulässt. Ist ein Element nach $\lceil log_{2}(n)\rceil$
+Suchschritten nicht gefunden, so ist es auch nicht in der Menge enthalten. $\lceil log_{2}(n)\rceil$ beschreibt dabei
+die maximale Anzahl, wie oft eine Zahl halbiert werden kann, sodass eine Zahl $0<n\leq1$ herauskommt. In dem Fall hat
+das Intervall, auf das der Aufenthaltsort eingeschränkt wurde, die Länge 1. Falls sich das gesucht Element dort nicht
+befindet, ist es folglich nicht Teil der Menge.
+
+\begin{bfseries}Laufzeit:\end{bfseries}\newline
+Da die Eingabegröße $n$ endlich ist, ist auch die Anzahl der Schleifendurchläufe $= log_{2}(n)$ endlich,
+und der Algorithmus wird terminieren. Da mit dem Arrayzugriff und dem Vergleich nur konstante Operationen
+in $log_{2}(n)$ Schleifendurchläufen ausgeführt werden, liegt die Gesamtlaufzeit in $\Theta(log_{2}(n))$.
 
 \section{Aufgabe 2}
+\subsection{a)}
+$f(n)=n\cdot3^{k} \in \Theta(n)$, da $3^k$ lediglich eine Konstante darstellt, die nicht von $n$ abhängt.
 
 \section{Aufgabe 3}
 
