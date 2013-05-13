@@ -21,7 +21,7 @@
 
 \maketitle
 
-\section{Aufgabe 1}
+\section*{Aufgabe 1}
 Binäre Suche:\newline
 
 boolean FIND(int[] array, int wanted) \{\newline
@@ -65,9 +65,21 @@ Da die Eingabegröße $n$ endlich ist, ist auch die Anzahl der Schleifendurchlä
 und der Algorithmus wird terminieren. Da mit dem Arrayzugriff und dem Vergleich nur konstante Operationen
 in $log_{2}(n)$ Schleifendurchläufen ausgeführt werden, liegt die Gesamtlaufzeit in $\Theta(log_{2}(n))$.
 
-\section{Aufgabe 2}
-\subsection{a)}
+\section*{Aufgabe 2}
+\subsection*{a)}
 $f(n)=n\cdot3^{k} \in \Theta(n)$, da $3^k$ lediglich eine Konstante darstellt, die nicht von $n$ abhängt.
+
+\subsection*{b)}
+$\lim_{x \to \infty}f(n) = lim_{x \to \infty}\frac{n^3-n^2+5}{n^3+4n^2-3n} = \lim_{x \to \infty}\frac{n^3}{n^3} = 1 \Rightarrow
+\frac{n^3-n^2+5}{n^3+4n^2-3n} \in \Theta(1)$
+
+\subsection*{c)}
+$f(n) = 4^{log_{2}(n)} = 2^{2*log_{2}(n)} = 2^{log_{2}(n) +log_{2}(n)} = 2^{log_{2}(n)}\cdot2^{log_{2}(n)} = n*n
+ = n^2 \in \Theta(n^2)$
+ 
+\subsection*{d)}
+$f(n) = \sum_{i=0}^{n-1} (n-1)^3 = n^3 + (n-1)^3 + \dots +(n-(n-1))^3 = n^3 + \underbrace{n^3 + 3ni^2 - 3n^2i - i^3}_{\in \Theta(n^3)\forall
+0<i<n-1} + 1 \in \Theta(n^3)$
 
 \section{Aufgabe 3}
 
