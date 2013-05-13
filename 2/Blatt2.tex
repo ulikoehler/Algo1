@@ -1,0 +1,83 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listingsutf8}
+\usepackage[pdftex]{graphicx}
+\usepackage[ngerman]{babel}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} %Latin modern = enhanced CM font
+\usepackage{xspace} %Space enhancements
+
+%opening
+\title{Übungsblatt 1}
+\author{Uli Köhler (10580373), Tobias Harrer (10575835)}
+
+\begin{document}
+
+\maketitle
+
+\section{Aufgabe 2}
+Idee: Erweiterung des 'Cleveren Algorithmus', sodass in der letzten Fallunterscheidung auch rMaxScores zugelassen werden,
+die gleichgroß wie der bestehende maxScore sind. Die Start- und Endpositionen jedes weiteren maxScore werden in einer Liste gespeichert:
+\newline
+\begin{tabbing}
+MSS \= Clever (int[] a, int n)\\
+begin\\
+\>int maxscore   := 0;\\
+\>int rmaxscore  := 0; rstart := 1;\\
+\>\textbf{int[] lStart; int[] rEnd; int MSScounter := 0;}\\
+\>for \= (i := 1; i $\leq$ n; i++) do\\
+\> \>if \=(rmaxscore > 0) then\\
+\> \> \>rmaxscore := rmaxscore + a[i];\\
+\> \> else \= \\
+\> \> \>rmaxscore := a[i]; rstart := i;\\
+\> \>\textbf{if (rmaxscore $\geq$ maxscore) then}\\
+\> \> \> maxscore := rmaxscore; \\ \> \> \> \textbf{lStart[MSScounter] := rstart;}\\ \> \> \> \textbf{rEnd[MSScounter] := i;}\\
+\> \> \>  \textbf{MSScounter++;}\\
+end
+\end{tabbing}
+Die Laufzeit bleibt bei $\mathcal{O}(n)$, da nur in der letzten Fallunterscheidung 3 Operationen
+hinzukommen, die in konstanter Laufzeit geschehen (Schreiben in Array, Addieren zu einem Integer). Werden hingegen lStart und rEnd
+als Listen implementiert, benötigt das Hinzufügen zur Liste lineare Laufzeit, die Gesamtlaufzeit würde in $\mathcal{O}(n^2)$ liegen.
+
+
+\section{Aufgabe 3}
+Die Einträge sind die Eingabegrößen, die der jeweilige Algorithmus in der jeweiligen Zeit bewältigt:\newline
+ \begin{tabular}{lccccr}
+   & 1s & 60s & 3,600s & 86,400s & 2,592,000s \\
+  $T_1$ & 2 &120 &	7,200 &	172,800 &5,184,000 \\
+  $T_2$&$\approx$7&$\approx$164&$\approx$5,763&$\approx$103,700 &$\approx$2,445,000\\
+  $T_3$&$\approx$32&$\approx$245&$\approx$1,897&$\approx$9,295&$\approx$50,912\\
+  $T_4$&$\approx$46&$\approx$182&$\approx$711&$\approx$2,052&$\approx$6,376\\
+  $T_5$&$\approx$13&$\approx$16&$\approx$20&$\approx$23&$\approx$26\\
+ \end{tabular}
+\newline Die Einträge wurden folgendermaßen berechnet (z.B. 1s, $T_1$):\newline
+$1s * 1000* \frac{1}{s} = 500 * n \Leftrightarrow n = 2$
+
+\section{Aufgabe 4}
+\subsection{Algorithmen mit polynomieller Laufzeit:}
+Da $T_1$ linear wächst ($T_1 \in \mathcal{O}(n)$), kann auch die Eingabegröße um das 100-fache steigen.\newline $T_3$ wächst quadratisch
+($T_1 \in \mathcal{O}(n^2)$), daher kann bei 100-facher Eingabegröße die Eingabe um das $\sqrt{100} = 10$-fache steigen. \newline $T_4 \in \mathcal{O}(n^3)$,
+daher kann die Eingabegröße um das $\sqrt[3]{100} \approx 4.6$-fache steigen.\newline
+Die Steigerung der Eingabegröße kann mithilfe der x-ten Wurzel berechnet werden, da sich die Eingabegröße folgendermaßen errechnet:\newline
+$t*o = a*n^x \Leftrightarrow n = \sqrt[x]{\frac{t*o}{a}}$ (o = Elementaroperationen pro Sekunde). Dabei handelt es sich um die jeweilige
+Umkehrfunktion.
+
+\subsection{Algorithmen mit exponentieller Laufzeit:}
+$t*o = a*x^n \Leftrightarrow n = \log_x(\frac{t*o}{a})$ \newline
+Werden die Elementaroperationen pro Sekunde verhundertfacht, so wird auch das Argument des Logarithmus mit dem 100-fachen multipliziert.
+Des weiteren gilt:\newline
+$\log(a*b) = \log(a) + \log(b)$. Da in diesem Fall durch das Verhundertfachen der Rechenleistung lediglich das Argument des 
+Logarithmus beeinflusst wird, können folglich konstant zusätzlich $\log_3(100) \approx 4$ Operationen zusätzlich ausgeführt werden.
+
+\subsection{Algorithmen mit logarithmischer Laufzeit:}
+$T_2(n) = n*\log(n) = \log(n^n)$ (da: $\log(a*b) = \log(a) + \log(b)$).\newline
+Dann gilt: $x = log_2(n^n) \Leftrightarrow n^n = 2^x \Leftrightarrow n = \sqrt[n]{2^x}$. Da n auf beiden Seiten der Gleichung steht,
+ist die Lösung nicht ohne Weiteres ersichtlich.
+
+\end{document}
