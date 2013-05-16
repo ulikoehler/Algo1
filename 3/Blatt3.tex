@@ -1,0 +1,196 @@
+\documentclass[a4paper,10pt,freqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listingsutf8}
+\usepackage[pdftex]{graphicx}
+\usepackage[ngerman]{babel}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{booktabs}
+%usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} %Latin modern = enhanced CM font
+\usepackage{xspace} %Space enhancements
+\usepackage{algorithm}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%opening
+\title{Übungsblatt 2}
+\author{Uli Köhler (10580373), Tobias Harrer (10575835)}
+\begin{document}
+
+\maketitle
+
+\section*{Aufgabe 1}
+Binäre Suche:\newline
+
+boolean FIND(int[] array, int wanted) \{\newline
+        int curPos = (int) Math.ceil(array.length / 2);\newline
+        for (int i = 0; i <= Math.ceil(Math.log(array.length) / Math.log(2)); i++) \{\newline
+            if (array[curPos] == wanted) \{\newline
+                return true;\newline
+            \} else if (wanted < array[curPos]) \{\newline
+                curPos -= (int) Math.ceil(array.length / (Math.pow(2, i + 2)));\newline
+            \} else \{\newline
+                curPos += (int) Math.ceil(array.length / (Math.pow(2, i + 2)));\newline
+            \}\newline
+            curPos = (curPos < 0) ? 0 : curPos;\newline
+            curPos = (curPos >= array.length) ? array.length - 1 : curPos;\newline
+        \}\newline
+        return false;\newline
+    	\}\newline
+    	
+\begin{bfseries}Eingabegröße:\end{bfseries}\newline
+Die Eingabegröße hängt von  der zum einen von der Größe des Arrays ab und von der
+Beschaffenheit der Array-Elemente, z.B. benötigen i.A. n Zahlen weniger Speicher
+als n Strings.
+
+\begin{bfseries}Charakteristische Operation:\end{bfseries}\newline
+Die charakteristische Operation ist der Vergleich eines beleibigen Elements $A_i$ des Arrays mit dem gesuchten $x$.
+Der Aufruf von $A_i$ und der Vergleich benötigen jeweils konstante Zeit. Diese Operationen werden maximal
+$\lceil log_{2}(n)\rceil$ mal durchgeführt, wobei $n$ die Länge des Arrays ist.
+
+\begin{bfseries}Korrektheit:\end{bfseries}\newline
+Durch bis zu $\lceil log_{2}(n)\rceil$-maliges ``halbieren'' des Arrays kann jedes Element, das darin enthalten ist,
+gefunden werden. Dies folgt daraus, dass die Menge gemäß einer totalen Ordnung sortiert ist. Bei jeder Halbierung wird
+das Intervall des Aufenthaltsorts des gesuchten Elements weiter eingeschränkt. Es kann sich nicht außerhalb der
+jeweils gewählten Hälfte befinden, da die <-Relation dies nicht zulässt. Ist ein Element nach $\lceil log_{2}(n)\rceil$
+Suchschritten nicht gefunden, so ist es auch nicht in der Menge enthalten. $\lceil log_{2}(n)\rceil$ beschreibt dabei
+die maximale Anzahl, wie oft eine Zahl halbiert werden kann, sodass eine Zahl $0<n\leq1$ herauskommt. In dem Fall hat
+das Intervall, auf das der Aufenthaltsort eingeschränkt wurde, die Länge 1. Falls sich das gesucht Element dort nicht
+befindet, ist es folglich nicht Teil der Menge.
+
+\begin{bfseries}Laufzeit:\end{bfseries}\newline
+Da die Eingabegröße $n$ endlich ist, ist auch die Anzahl der Schleifendurchläufe $= log_{2}(n)$ endlich,
+und der Algorithmus wird terminieren. Da mit dem Arrayzugriff und dem Vergleich nur konstante Operationen
+in $log_{2}(n)$ Schleifendurchläufen ausgeführt werden, liegt die Gesamtlaufzeit in $\Theta(log_{2}(n))$.
+
+\section*{Aufgabe 2}
+\subsection*{a)}
+$f(n)=n\cdot3^{k} \in \Theta(n)$, da $3^k$ lediglich eine Konstante darstellt, die nicht von $n$ abhängt.
+
+\subsection*{b)}
+$\lim_{x \to \infty}f(n) = lim_{x \to \infty}\frac{n^3-n^2+5}{n^3+4n^2-3n} = \lim_{x \to \infty}\frac{n^3}{n^3} = 1 \Rightarrow
+\frac{n^3-n^2+5}{n^3+4n^2-3n} \in \Theta(1)$
+
+\subsection*{c)}
+$f(n) = 4^{log_{2}(n)} = 2^{2*log_{2}(n)} = 2^{log_{2}(n) +log_{2}(n)} = 2^{log_{2}(n)}\cdot2^{log_{2}(n)} = n*n
+ = n^2 \in \Theta(n^2)$
+ 
+\subsection*{d)}
+$f(n) = \sum_{i=0}^{n-1} (n-1)^3 = n^3 + (n-1)^3 + \dots +(n-(n-1))^3 = n^3 + \underbrace{n^3 + 3ni^2 - 3n^2i - i^3}_{\in \Theta(n^3)\forall
+0<i<n-1} + 1 \in \Theta(n^3)$
+
+\section{Aufgabe 3}
+
+\section{Aufgabe 4}
+Gegeben sei $a_n = 2a_{n-1}-a{n-2} + 1$
+sowie $a_0 = 0$ und $a_1 = 1$\\
+\subsection{Schritt 1: Alle Vorkommen von a auf eine Seite bringen}
+\begin{align*}
+a_n &= 2a_{n-1}-a{n-2}+1 \\
+a_n-2a_{n-1}+a_{n-2}&=1
+\end{align*}
+\begin{align*}
+I)\quad&a_n-2a{n-1}+a_{n-2}&=1\\
+II)\quad&a_n-1-2a_{n-2}+a_{n-3}&=1\\
+\hline\\
+II-I)\quad&a_n-3a_{n-1}+3a_{n-2}-a_{n-3}&=0\label{(1)-(2)}
+\end{align*}
+Aus den gegebenen Variablen ist bekannt, dass gilt:\\$a_2 = 2a_1-a_0+1 = 2\cdot1-0+1=3$\\
+
+Charakteristisches Polynom der Rekursionsgleichung (Bestimmung trivial):\\
+$C(x) = x^3-3x^2+3x-1$\\
+\textrightarrow Ch. Polynom hat 3 Nullstellen.
+\subsection{Finden der Nullstellen des charakteristischen Polynoms}
+Nullstelle Nr. 1 muss erraten werden: $1$\\
+Polynomdivision: $(x^3-3x^2+3x-1)/(x-1)=x^2-2x+1$
+Dann Anwendung der Mitternachtsformel (trivial) \textrightarrow Polynom hat dreifache Nullstelle bei 1
+\subsection{Aufstellen der Formel}
+\begin{eqnarray*}
+ a_n = \sum_{i=0}^m\sum_{j=0}^{k_i-1} \alpha_{i,j}n^i\\
+ x_i^n  =\sum_{i=0}^m\sum_{j=0}^{k_i-1} \alpha_{i,j}n^j\\
+ =\alpha_{1,0}n^0+\alpha_{1,1}n^1+\alpha_{1,2}n^2+\alpha_{2,0}n^0+\alpha_{2,1}n^1+\alpha_{2,2}n^2+\alpha_{3,1}n^1+\alpha_{3,2}n^2\\=
+ n^0(\alpha_{1,0}+\alpha_{2,0}+\alpha_{3,0}+n^1(\alpha_{1,1}+\alpha_{2,1}+\alpha_{3,1})+n^2(\alpha_{1,2}+\alpha_{2,2}+\alpha_{3,2})\\=
+ c_1n^0+c_2n^1+c_3n^2
+\end{eqnarray*}
+
+\subsection{Einsetzen der Anfangsbedingungen}
+\begin{align*}
+ 0&=c_1+c_2n+c_3(n^2-n) &\text{für\quad}& n = 0\rightarrow 0 = c_1+c_2\cdot0+c_3(-1\cdot0) &\rightarrow c_1& = 0\\
+ 1&=c_2+nc_2+c_3(n^2-n) &\text{für\quad}& n = 1\rightarrow 1 = c_2+0 &\rightarrow& c_2 = 1\\
+ 1&=c_2+nc_2+c_3(n^2-n) &\text{für\quad}& n = 2\rightarrow 3 = 2+c_3\cdot(2\cdot1) &\rightarrow c_3& = 0.5\\
+\end{align*}
+Daraus folgt: $a_n = n+\frac{n^2-n}{2}=\frac{2n+n^2-n}{2}=\frac{n^2+n}{2}$ q.e.d
+
+\section{Aufgabe 5 a)}
+\textbf{Sonderfall:} Feld ist bereits sortiert \textrightarrow In diesen Fall ist die Schranke trivialerweise durch $log_2(n)$ (binäre Suche) gegebe
+\newline
+Im Folgenden wird davon ausgegangen, dass das zu durchsuchende Feld nicht sortiert ist, oder nicht davon ausgegangen werden kann, dass es sortiert ist.\\
+Im Worst Case benötigt die Suche mindestens $\Omega(n)$ Elemente.
+Der Entscheidungsbaum wird wie folgt definiert (Start beim ersten Element des Feldes):
+\begin{itemize}
+ \item Überprüfe, ob das zu suchende Element mit dem aktuellen Element übereinstimmt
+ \begin{itemize}
+  \item Wenn die Elemente übereinstimmen, terminiere (gefunden)
+  \item Wenn die Elemente nicht übereinstimmen:
+  \begin{itemize}
+   \item Fahre fort mit dem nächsten Element
+   \item Sofern kein nächstes Element existiert, terminiere (nicht gefunden)
+  \end{itemize}
+ \end{itemize}
+\end{itemize}
+Dieses Baumelement enthält genau einen Vergleich (Elementaroperation).
+Worst-Case-Szenario: Das zu suchende Element kommt nicht vor, oder als letztes Element.
+
+In diesem Fall wird der obige Anweisungsblock n mal ausgeführt, d.h. n Vergleiche werden durchgeführt.
+Da $n \in \Omega(n)$ gilt, gilt die obige Behauptung q.e.d.
+{\LARGE \textsc{Aber:}}
+\section{Aufgabe 5 b)}
+Berechnung der Wahrscheinlichkeiten über die Grundgesamtheit der Felder für ein gegebenes n:
+\begin{align*}
+ P(\text{Treffer an Position i}) &= \frac{1-p}{n}\\
+ 1-P(\text{Treffer an Position i}) &= \frac{n-1+p}{n} = 1-\left(\frac{1-p}{n}\right)\\
+ P(\text{1 Vergleich benötigt}) &=  \frac{1-p}{n}\\
+ P(\text{2 Vergleiche benötigt}) &=  [1-P(\text{1 Vergleich benötigt})]\cdot\frac{1-p}{n}\\
+ &= np\footnotemark + \text{P(1 Vergleich benötigt) $\cdot$ (1 == Kosten für einen Vergleich)}\\&+ \text{P(2 Vergleiche benötigt) $\cdot$ (2 == Kosten für zwei Vergleiche)} + ...\\
+ A(n) = E[T(L_n)] &= np+\sum_{i=1}^{n}\cdot i\left(\frac{n-1+p}{n}\right)^{i-1}\left(\frac{1-p}{n}\right)
+\end{align*}
+\footnotetext{Falls das zu suchende Element nicht existiert}
+\section{Aufgabe 6a)}
+\renewcommand{\arraystretch}{1.3} 
+\begin{tabular}{ccc}
+ \toprule
+ n&$T_n$&$\frac{T_n}{T_{n-1}}$\\
+ \midrule
+ 2&4&4\\
+ 3&13&$3.25$\\
+ 4&40&$\frac{40}{13}\cong3.0769$\\
+ 5&121&$\frac{121}{40}\cong3.025$\\
+ 6&364&$\frac{364}{121}\cong3.0083$\\
+ 7&1093&$\frac{1093}{364}\cong3.0027$\\
+ 8&3280&$\frac{3280}{1093}\cong3.0009$\\
+ 9&9841&$\frac{9841}{3280}\cong3.0003$\\
+ 10&29524&$\frac{29524}{9841}\cong3.0001$\\
+ \bottomrule
+\end{tabular}
+\section{Aufgabe 6b)}
+Erraten: $T(n)=\frac{3^n-1}{2}$\\
+Induktionsanfang: $T(0) = \frac{3^0-1}{2} = \frac{1-1}{2} = 0 q.e.d$\\
+Induktionsfortführung:
+\begin{align*}
+ \frac{3^n-1}{2} &= \frac{3\cdot3^{n-1}-1}{2}\\
+ &= \frac{4\cdot3^{n-1}-3^n+3-4}{2}\\
+ &= 2\cdot3^n-\frac{3^n}{2}+1.5-2\\
+ &= 2\cdot3^n-2-1.5\cdot3^{n-1}+1.5\\
+ &= 2\cdot(3^n-1)-1.5\cdot(3^{n-1}-1)\\
+ &= 4\cdot(\frac{3^n-1}{2})-3\cdot(\frac{3^{n-1}-1}{2})\\
+ &= 4\cdot(\frac{3^n-1}{2})-3\cdot(\frac{3^{n-1}-1}{2})\\
+ &= 4T(n)-3T(n-1)\\
+ &= T(n+1)\qquad q.e.d
+\end{align*}
+
+\end{document}
