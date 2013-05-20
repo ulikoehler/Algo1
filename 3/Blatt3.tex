@@ -11,7 +11,7 @@
 \usepackage{tikz}
 \usepackage{textcomp}
 \usepackage{amsmath}
-\usepackage{lipsum}
+\usepackage{lipsum}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{mathtools}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -21,7 +21,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern} %Latin modern = enhanced CM font
 \usepackage{xspace} %Space enhancements
-\usepackage{algorithm}
+\usepackage{algorithm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 %opening
@@ -29,7 +29,7 @@
 \author{Uli Köhler (10580373), Tobias Harrer (10575835)}
 \begin{document}
 
-\newcommand{\Olog2n}{\ensuremath\mathcal{O}(log_2(n))}
+\newcommand{\Olog2n}{\ensuremath\mathcal{O}(log_2(n))}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \maketitle
 
 \section*{Aufgabe 1}
@@ -41,5 +41,11 @@
   \end{align*}
 \section*{Aufgabe 2}
 \section*{Aufgabe 3}
+Induktionsanfang, n=1:\newline
+$T(1) = 0 \in \mathcal{O}(1) \subset \mathcal{O}(n) \subset \mathcal{O}(n\cdot log^2 n)$, da der Logarithmus eine streng monoton wachsende
+Funktion ist, kann auch sein Quadrat multipliziert mit einer linearen Funktion diese nur stärker wachsen lassen.\newline
+Induktionsschritt, $n\rightarrow 2\cdot n$:\newline
+$T(2\cdot n) = 2\cdot T(2\cdot n/2)+n\cdot log(n) = 2\cdot \underbrace{T(n)}_{\in \mathcal{O}(n\cdot log^2 n)\newline nach I.-V.}+n\cdot log(n)
+\leq 2\cdot T(n) + \underbrace{n\cdot log^2 n}_{\in \Theta(n\cdot log^2 n)}\in \mathcal{O}(n\cdot log^2 n)$
 \section*{Aufgabe 4}
 \end{document}
