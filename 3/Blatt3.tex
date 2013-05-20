@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt,freqn]{article}
+\documentclass[a4paper,10pt]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage{listingsutf8}
 \usepackage[pdftex]{graphicx}
@@ -7,8 +7,14 @@
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{amsmath}
 \usepackage{tikz}
 \usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{booktabs}
 %usepackage[utf8x]{inputenc}
@@ -17,15 +23,23 @@
 \usepackage{xspace} %Space enhancements
 \usepackage{algorithm}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
 %opening
 \title{Übungsblatt 3}
 \author{Uli Köhler (10580373), Tobias Harrer (10575835)}
 \begin{document}
 
+\newcommand{\Olog2n}{\ensuremath\mathcal{O}(log_2(n))}
 \maketitle
 
-\section{Aufgabe 1}
-\section{Aufgabe 2}
-\section{Aufgabe 3}
-\section{Aufgabe 4}
+\section*{Aufgabe 1}
+
+\begin{align*}
+  %\numberthis\log_{c}(n) = \frac{\log_{2}{n}}{\log_{2}{c}} = \frac{1}{\log_2(c)}\log_2(n) \in \ \text{q.e.d}\\
+  %\numberthis\text{Gegenbeispiel: Wähle } f(n) &= 2\log_2(n), \quad g(n) &= \log_2(n) \rightarrow\\
+  %2\log_2(n) &\in {\mathcal O}(\log_2(n)) \nRightarrow 2^{f}=2^{2\log_2(n)}=2^{\log_2(n^2)}=n^2 \notin {\mathcal O}(n) = {\mathcal O}(2^{\log_2(n)}) = {\mathcal O}(2^{log_2(n)}) \Rightarrow \lightning
+  \end{align*}
+\section*{Aufgabe 2}
+\section*{Aufgabe 3}
+\section*{Aufgabe 4}
 \end{document}
