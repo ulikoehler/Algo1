@@ -117,13 +117,13 @@ i--;//Elemente des Felds, die größer sind als die Summe können ausgeschlossen
 \}\newline
 if(x == feld[i])\{return (i,i)\}//die ``triviale'' Lösung, ein einziges Element gleich x.\newline
 int summe = 0, j = 0;\newline
-for(j = 0; j <= i && summe <= x;j++)\{//addiere sequentiell die Array Element vom nullten bis zum max. i-ten\newline
+for(j = 0; j <= i AND summe <= x;j++)\{//addiere sequentiell die Array Element vom nullten bis zum max. i-ten\newline
 summe += feld[j];\newline
 \}\newline
 if(summe == x)\{return (0, j);\}//Summe geht von $a_0$ bis $a_j$\newline
 else if(j == i)\{return (0,-1);\}//Da feld[i] > x, wird summe+=feld[i] größer als x sein, (0,-1) wird als ``[i,j] nicht vohanden'' definiert.\newline
 for(int k = j, l = 0; k < i; k++)\{//Wiederhole (i-j+1)-mal, also von der momentanen (j) bis zur max. sinnvollen Position (i)\newline
-while(x > summe)\{\newline
+while(summe > x)\{\newline
 summe-=feld[l];//Ziehe von summe so lange die kleinsten Elemente des Felds ab, bis summe >= x\newline
 l++;\newline
 if(x == summe)\{return (l,k);\}\newline
@@ -133,4 +133,15 @@ if(x == summe)\{return (l,k);\}\newline
 \}\newline
 return (0, -1);//Kommt der Algorithmus bis hier, gibt es kein Intervall [i,j], s.d. $a_i+...+a_j = x$ erfüllt wäre.\newline
 \}\newline
+Alle for- und while-Schleifen werden maximal n (= Länge des Felds) mal durchlaufen. Die Anzahl dieser Schleifen ist nicht von der Eingabegröße
+abhängig, sondern liegt konstant bei vier Schleifen. In jeder Schleife werden lediglich Additionen (bzw. Subtraktionen) ausgeführt oder Zugriffe
+auf Arrays, die jew. in konstanter Zeit ablaufen. Auch die letzte for-Schleife, in der sich eine weitere while-Schleife befindet, führt maximal n
+konstante Zeit benötigende Operationen aus. Dadurch liegt die Gesamtlaufzeit in $\mathcal{O}(n)$.\newline
+Falls es eine Lösung gibt, wird diese auch vom Algorithmus gefunden. Falls sie ein einzelnes Element ist, wird die Lsg. in Z.6 gefunden.
+Falls die Lsg. bei [0,j] liegt, wird sie in Z. 12 gefunden. Liegt sie in [i,j], dann wird sie in Z.21 oder Z.24 gefunden. Kommt der Algorithmus
+bis Zeile 15, ist die Lsg. [i,j], oder sie ex. nicht. Angenommen sie existiert, dann ist in Z.15 summe > x. Nun wird versucht x==summe
+herbeizuführen, indem die ersten i Elemente des Felds wieder abgezogen werden, bis summe<=x. Falls summe<x, wird das nächst größere Element
+des Feldes hinzuaddiert und die kleinsten verbliebenen Elemente des Felds wieder abgezogen. Wiederholt man dieses Verfahren, bis man das
+Feldelement hinzuaddiert, das > x ist. Hat man eine Lösung gefunden, sonst existiert keine. Des weiteren gilt: Falls beim addieren der 
+kleinsten Feldelemente das i-te erreicht wurde, das selbst > x ist, muss summe + feld[i] > x sein, und es gibt keine Lösung [i,j].
 \end{document}
