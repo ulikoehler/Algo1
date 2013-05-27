@@ -32,13 +32,30 @@
 \maketitle
 
 \section*{Aufgabe 1}
-$s := abaababababaabb$
-Präfix-Tabelle/Rand-Tabelle:
-\begin{tabular}{l|c|c}
-\textbf{}
-
 
 \section*{Aufgabe 2}
+\textbf{Begründungen in der Tabelle:}\\
+\textbf{1:}\ da beim Einsetzen des vorherigen Borders ein Vergleich zeigt dass die jeweils folgenden Zeichen nicht gleich sind\\
+\textbf{2:}\ da beim Einsetzen des vorherigen Borders ein Vergleich zeigt dass die jeweils folgenden Zeichen gleich sind\\
+\begin{tabular}{l|l|p{8cm}|c}
+\textbf{i} & \textbf{Präfix} & \textbf{Border} & \textbf{$BorderTabelle[i]$}\\\hline
+0 &\$ & Hat nur \$ als Border & -1s\\
+1 &a\$ & Border kann nicht erweitert werden & 0\\
+2 &ab\$ & Border kann nicht erweitert werde & 0\\
+3 &aba\$ & Border kann hier erweitert werden & 1\\
+4 &abaa\$ & Border kann nicht direkt erweitert werden$\ ^1$, aber Border von BorderTabelle[1] kann fortgesetzt werd & 1\\
+5 &abaab\$ & Border kann hier erweitert werden$\ ^2$ & 2\\
+6 &abaaba\$ & Border kann hier erweitert werden$\ ^2$ & 3\\
+7 &abaabab\$ & Border kann nicht direkt erweitert werden$\ ^1$ aber Border von BorderTabelle[3] kann fortgesetzt werden& 2\\
+8 &abaababa\$ & Border kann hier erweitert werden$\ ^2$ & 3\\
+9 &abaababab\$ & Border kann nicht direkt erweitert werden$\ ^1$ aber Border von BorderTabelle[3] kann fortgesetzt werden & 2\\
+10&abaabababa\$ & Border kann hier erweitert werden$\ ^2$ & 3\\
+11&abaabababab\$ & Border kann nicht direkt erweitert werden$\ ^1$ aber Border von BorderTabelle[3] kann fortgesetzt werden & 2\\
+12&abaababababa\$ & Border kann hier erweitert werden$\ ^2$ & 3\\
+13&abaababababaa\$ & Border kann hier erweitert werden$\ ^2$ & 4\\
+14&abaababababaab\$ & Border kann hier erweitert werden$\ ^2$ & 5\\
+15&abaababababaabb\$ & Kein Border kann hier fortgesetzt werden & 0
+\end{tabular}
 \section*{Aufgabe 3}
 Sei $\Sigma = \{a,b\}$, $t$ der Text mit Länge $n$, $s$ ein Suchmuster der Länge $m$ und sei $s$ dergestalt: $a^kb$. Um die geforderte
 Bedingung von $2n -m$ Vergleichen zu erfüllen, muss $t$ folgendermaßen aussehen: $a^{k'}b$, wobei $k'\geq k$.\newline Beispiele $(n,m)$:\newline
