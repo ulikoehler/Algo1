@@ -11,7 +11,7 @@
 \usepackage{tikz}
 \usepackage{textcomp}
 \usepackage{amsmath}
-\usepackage{lipsum}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{lipsum}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{mathtools}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -21,7 +21,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern} %Latin modern = enhanced CM font
 \usepackage{xspace} %Space enhancements
-\usepackage{algorithm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{algorithm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \newcounter{subeq}
 \renewcommand{\thesubeq}{\theequation\arabic{subeq}}
@@ -38,5 +38,31 @@
 \section*{Aufgabe 1}
 \section*{Aufgabe 2}
 \section*{Aufgabe 3}
+Sei $\Sigma = \{a,b\}$, $t$ der Text mit Länge $n$, $s$ ein Suchmuster der Länge $m$ und sei $s$ dergestalt: $a^kb$. Um die geforderte
+Bedingung von $2n -m$ Vergleichen zu erfüllen, muss $t$ folgendermaßen aussehen: $a^{k'}b$, wobei $k'\geq k$.\newline Beispiele $(n,m)$:\newline
+\begin{itemize}
+ \item Fall 1: $n=m$:\newline \texttt{t: aa...b}\newline \texttt{s: aa...b}\newline Es gibt dann $n= 2n-n = 2n-m$ Vergleiche, Bedingung erfüllt.
+ \item Fall 2: $n>m$:\newline
+\begin{itemize}
+ \item Bsp. 2.1: $n=5$, $m=3$:\newline \texttt{...01234}\newline \texttt{t: aaaab}\newline \texttt{...||-}\newline\texttt{s: aab} \newline
+ Mismatch bei $j=2$, $s$ wird auf Position $2-1=1$ verschoben, da $|\partial(aa)| = |a| = 1$, der nächste Vergleich startet bei $j=2$:\newline
+ \texttt{...01234}\newline \texttt{t: aaaab}\newline \texttt{.....|-}\newline\texttt{s: .aab} \newline
+  Mismatch bei $j=3$, $s$ wird auf Position $3-1=2$ verschoben, da $|\partial(aa)| = |a| = 1$, der nächste Vergleich startet bei $j=3$:\newline
+  \texttt{...01234}\newline \texttt{t: aaaab}\newline \texttt{......||}\newline\texttt{s: ..aab} \newline
+  Insgesamt $7 = 2*5-3 = 2n-m$ Vergleiche, Bedingung erfüllt.\newline Es fällt auf, dass bis auf die ersten $m-1$ Positionen jede Position
+  2 mal einem Vergleich unterzogen wird. Dies liegt daran, dass $s$ jew. nur um eine Position verschoben werden kann.
+  \item 2.2: Allgemeiner Fall:\newline
+  Das oben beschriebene Verhalten gilt für alle $n>m$: Die ersten $m-1$ Positionen werden genau einmal verglichen, an allen anderen, bis auf
+  die letzte, also $n-1$-te Position, finden 2 Vergleiche statt, da $s$ nur um eine Position nach rechts verschoben wird, also insgesamt
+  $2n-(m-1)-1 = 2n-m$ Vergleiche. Das gilt für alle $n>m$.\newline Des weiteren tritt bis auf das letzte Mal in
+  $s$ bei $j=m-1$ ein Mismatch auf, da dann $t[i+j] = a$ und $s[j]=b$, außer $i+j=n-1$. Wie weit $s$ verschoben wird, entscheidet
+  $m-border[j]$. Allerdings ist das immer gleich 1, da der der längste echte Rand von $a^{m-1}$ um eins kleiner ist als $m$.\newline
+  Es folgt also: solange $n>m$ ist wird $s$ jeweils nur um 1 Position nach rechts verschoben, wobei in $t$ an allen Positionen $i$ von $t[m]$ bis
+  $t[n-2]$ ein Mismatch auftreten wird. Daraufhin wird $s$ um 1 weitergeschoben und an Pos. $i$ \textit{ein weiterer Vergleich} durchgeführt,
+  der immer zu einem Match führt (a=a). Der nächste Vergleich bei $i+1$ wird jedoch immer zu einem Mismatch (a$\neq$b) führen usw.
+\end{itemize}
+
+\end{itemize}
+
 \section*{Aufgabe 4}
 \end{document}
