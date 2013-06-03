@@ -131,6 +131,23 @@ eig. Rand von $s_0...s{j-1}$ nicht einfach erweitert werden kann.
 \State \Return FALSE;
 \EndFunction
 \end{algorithmic}
+Der KMP-Algorithmus kann aus dem Skript übernommen werden, bis auf die Berechnung der $border'$-Tabelle.\newline
+\textit{Laufzeit:} (vgl. Skript) maximal $n-m+1$ erfolglose Vergleiche, da nach jedem erfolglosen Vergleich $i\in [0 : n- m]$ erhöht und
+im Verlauf des Algorithmus nie erniedrigt wird. Der Wert von $i+j$ wird nie erniedrigt. Seien $i$ und $j$ die Werte vor und $i'$ und $j'$
+die Werte nach einem erfolglosen Vergleich, mit $i' + j' = (i + j- border'[j]) + (max(0, border'[j]))$.\newline
+Fall 1 ($border'[j] \geq 0$): Ist $border'[j] \geq 0$, dann gilt offensichtlich $i'+j' = i + j$.\newline
+Fall 2 ($border'[j] < 0$): Ist $border[j] = -1$, dann muss $j = 0 = j'$ sein. Dann gilt
+aber offensichtlich $i'+j' = i' + 0 = (i + 0 -(-1)) + 0 = i + 1 = i + j + 1$.\newline
+Also wird i + j nach einem erfolglosen Vergleich nicht kleiner, nach einem erfolgreichen Vergleich wird $i + j$ um 1 erhöht.
+Somit werden insgesamt maximal $2n- m + 1$ Vergleiche ausgeführt.\newline
+\textit{Korrektheit:}
+\begin{itemize}
+  \item $s$ ist in $t$ enthalten und Suffix von $t$:\newline Die Bedingung der zweiten while-Schleife wird für alle $j\in [0:m-1]$ erfüllt sein,
+  der Fall $j=m$ wird eintreten und es wird TRUE zurückgegeben.
+  \item $s$ ist in $t$ enthalten und nicht Suffix von $t$: Es gibt ein $j\in [0:m-1]$, an dem ein Mismatch auftreten wird, dann wird $i$ um
+  $j-border'[j]$ weitergeschoben und $j$ auf max($0,border'[j]$) gesetzt. $border'[j]$ entspricht der Anzahl
+\end{itemize}
+
 \section*{Aufgabe 3}
 %Uli
 
