@@ -149,6 +149,39 @@ Somit werden insgesamt maximal $2n- m + 1$ Vergleiche ausgeführt.\newline
 \end{itemize}
 
 \section*{Aufgabe 3}
-%Uli
 
+\begin{tabular}{l|l|p{8cm}|c}
+\textbf{i} & \textbf{Präfix inkl. Mismatch} & \textbf{Schritte} & \textbf{$ShiftTabelle[i]$}\\\hline
+0 &\$ & Nicht anwendbar\\
+1 &b\$ & Siehe (1) & 23\\
+2 &ba\$ & Siehe (1) & 23\\
+3 &bab\$ & Siehe (1) & 23\\
+4 &babb\$ & Siehe (1) & 23\\
+5 &babba\$ & Siehe (1) & 23\\
+6 &babbaa\$ & Siehe (1) & 23\\
+7 &babbaab\$ & Siehe (1) & 23\\
+8 &babbaaba\$ & Siehe (1) & 23\\
+9 &babbaabab\$ & Siehe (1) & 23\\
+10&babbaababb\$ & Siehe (1) & 23\\
+11&babbaababba\$ & Siehe (1) & 23\\
+12&babbaababbab\$ & Siehe (1) & 23\\
+13&babbaababbabb\$ & Siehe (1) & 23\\
+14&babbaababbabba\$ & Siehe (1) & 23\\
+15&babbaababbabbaa\$ & Siehe (1) & 23\\
+16&babbaababbabbaab\$ & Siehe (1) & 23\\
+17&babbaababbabbaaba\$ & Siehe (1)& 23\\
+18&babbaababbabbaabab\$ & Siehe (1) & 23\\
+19&babbaababbabbaababb\$ & Siehe (1) & 23\\
+20&babbaababbabbaababba\$ & Siehe (1) & 23\\
+21&babbaababbabbaababbaa\$ & Siehe (1) & 23\\
+22&babbaababbabbaababbaab\$ & Das Alphabet ist [ab], daher wird nach dem Substring abab gesucht, der 2 positionen vorher vorhanden ist. & 2\\
+23&babbaababbabbaababbaaba\$ & Das Alphabet ist [ab], daher wird nach dem Substring bba gesucht --> 5 pos vorher & 5\\
+24&babbaababbabbaababbaabab\$ & Das Alphabet ist [ab], daher wird nach dem Substring aa gesucht, das 4 Pos. zuvor vorkommt & 4\\
+25&babbaababbabbaababbaababa\$ & Kein Good Suffix vorhanden, & 1
+\end{tabular}
+
+\begin{itemize}
+ \item (1): Pattern kann komplett verschoben werden, da der zu suchende Substring (der, s.u., eindeutig bestimmt werden kann), im Pattern nicht mehr vorkommt.
+ \item Da das Alphabet nur die Größe 2 hat, kann der zu suchende Substring immer eindeutig bestimmt werden.
+\end{itemize}
 \end{document}
