@@ -78,7 +78,7 @@ geforderte Bedingung darstellt.
 \State $border'[1] := 0$;
 \State int $i := border'[1]$;
 \For{(int $j := 2$; $j\leq m$; $j ++$)}
-  \While{($(i\geq 0) \&\& (s[i] = s[j-1])$)}
+  \While{($(i\geq 0) \&\& (s[i] = s[j-1])$)}//Änderung
     \State $i := border'[i]$;
   \EndWhile
   \State $i++$;
@@ -125,27 +125,37 @@ eig. Rand von $s_0...s{j-1}$ nicht einfach erweitert werden kann.
     \State $j++;$
     \If {($j = m$)} \State \Return TRUE;\EndIf
   \EndWhile
-  \State $i := i + (j-border'[j])$;
+  \State $i := i + max(1,(j-border'[j]-1))$;//Änderung ``-1'', da $border'[j]$ Mismatch mitzählt
   \State $j :=$ max$(0, border'[j]);$
 \EndWhile
 \State \Return FALSE;
 \EndFunction
 \end{algorithmic}
-Der KMP-Algorithmus kann aus dem Skript übernommen werden, bis auf die Berechnung der $border'$-Tabelle.\newline
+Der KMP-Algorithmus kann aus dem Skript übernommen werden, bis auf die Berechnung der $border'$-Tabelle, die nach Aufgabe 1 berechnet werden muss.
+Außerdem muss die Inkrementierung von $i$ modifiziert werden, da $border'[j]$ auch den Mismatch zwischen $s_j$ und $t_{i+j}$ beinhaltet. Man muss
+daher 1 abziehen.\newline\newline
 \textit{Laufzeit:} (vgl. Skript) maximal $n-m+1$ erfolglose Vergleiche, da nach jedem erfolglosen Vergleich $i\in [0 : n- m]$ erhöht und
-im Verlauf des Algorithmus nie erniedrigt wird. Der Wert von $i+j$ wird nie erniedrigt. Seien $i$ und $j$ die Werte vor und $i'$ und $j'$
-die Werte nach einem erfolglosen Vergleich, mit $i' + j' = (i + j- border'[j]) + (max(0, border'[j]))$.\newline
-Fall 1 ($border'[j] \geq 0$): Ist $border'[j] \geq 0$, dann gilt offensichtlich $i'+j' = i + j$.\newline
-Fall 2 ($border'[j] < 0$): Ist $border[j] = -1$, dann muss $j = 0 = j'$ sein. Dann gilt
+im Verlauf des Algorithmus nie erniedrigt wird. Da $border'[j]$ maximal j-1 sein kann (z.B. für $s=0^{m-1}1$), ist es möglich, dass $i$ nicht erhöht wird,
+weil $j-border'[j]-1 = j-(j-1)-1 = 0$ wäre. Um eine Inkrementierung von $i$ um mindestens 1 zu gewährleisten, wird max($1,(j-border'[j]-1)$) verwendet.\newline
+Der Wert von $i+j$ wird nie erniedrigt. Seien $i$ und $j$ die Werte vor und $i'$ und $j'$
+die Werte nach einem erfolglosen Vergleich, mit $i' + j' = (i + max(1,(j- border'[j]-1)) + (max(0, border'[j]))$.\newline
+Fall 1 ($border'[j] > 0$): Ist $border'[j] > 0$, dann gilt offensichtlich $i'+j' = i + j$.\newline
+Fall 2 ($border'[j] \leq 0$): Ist $border[j] = -1$ oder 0, dann muss $j = 0 = j'$ sein. Dann gilt
 aber offensichtlich $i'+j' = i' + 0 = (i + 0 -(-1)) + 0 = i + 1 = i + j + 1$.\newline
 Also wird i + j nach einem erfolglosen Vergleich nicht kleiner, nach einem erfolgreichen Vergleich wird $i + j$ um 1 erhöht.
-Somit werden insgesamt maximal $2n- m + 1$ Vergleiche ausgeführt.\newline
+Somit werden insgesamt maximal $2n- m + 1$ Vergleiche ausgeführt ($\rightarrow$obere Schranke).\newline
 \textit{Korrektheit:}
 \begin{itemize}
-  \item $s$ ist in $t$ enthalten und Suffix von $t$:\newline Die Bedingung der zweiten while-Schleife wird für alle $j\in [0:m-1]$ erfüllt sein,
+  \item[Fall 1:] $s$ ist in $t$ enthalten und Suffix von $t$:\newline Die Bedingung der zweiten while-Schleife wird für alle $j\in [0:m-1]$ erfüllt sein,
   der Fall $j=m$ wird eintreten und es wird TRUE zurückgegeben.
-  \item $s$ ist in $t$ enthalten und nicht Suffix von $t$: Es gibt ein $j\in [0:m-1]$, an dem ein Mismatch auftreten wird, dann wird $i$ um
-  $j-border'[j]$ weitergeschoben und $j$ auf max($0,border'[j]$) gesetzt. $border'[j]$ entspricht der Anzahl
+  \item[Fall 2:] $s$ ist in $t$ enthalten und nicht Suffix von $t$: Es gibt ein $j\in [0:m-1]$, an dem ein Mismatch auftreten wird, dann wird $i$ um
+  $max(1,j-border'[j]-1)$ weitergeschoben und $j$ auf max($0,border'[j]$) gesetzt. Dies wiederholt sich solange, bis $s$ ein Präfix eines Suffixes von $t$ wird,
+  also ein Substring von $t$ ist und in $t$ enthalten ist. Dann kann analog zu Fall 1 argumentiert werden.
+  \item[Fall 3:] $s$ ist nicht in $t$ enthalten: Es gibt ein $j\in [0:m-1]$, an dem ein Mismatch auftreten wird, dann wird $i$ um
+  $max(1,j-border'[j]-1)$ weitergeschoben und $j$ auf max($0,border'[j]$) gesetzt. Da $s$ nicht in $t$ enthalten ist gibt es aber in jedem Durchlauf der 2. while-Schleife ein j,
+  sodass die Bedingung $(t[i + j] = s[j])$ nicht erfüllt wird. Also kann $j=m$ nie erfüllt werden, und nie TRUE zurückgegeben werden. Da i in jedem Durchlauf
+  der ersten while-Schleife erhöht wird, und dabei nie ``return TRUE;'' erreicht wird, führt der Algorithmus unweigerlich nach Beenden der äußeren while-Schleife zu
+  ``return FALSE;''.
 \end{itemize}
 
 \section*{Aufgabe 3}
