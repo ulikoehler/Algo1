@@ -62,10 +62,20 @@
 \begin{document}
 
 \maketitle
+\section*{Aufgabe 1}
+Präambel: Für ein Zeichen $x \in \Sigma$ sei $x^n$ für $n \in \mathbb{N}$ definiert als die n-malige Wiederholung von $x$.\\
+Die Familie F sei nun definiert durch die Suchmustermenge $s_n$ und die Textmenge $t_n$, wobei $o := max(m,n)$	\\
+Definition des Suchmusters: $s_n = ab^{o-1}$\\
+Definition des Textes: $t_n = b^{10\cdot o}$\\
+Daraus folgt $c = 0.9$\\
+Da der Mismatch immer an der ersten Stelle von s auftritt, kann jeweils nur um 1 geshiftet werden.
+Da $|s| = 0.1*|t|$ gilt, und Boyer-Moore um $|s|$ weniger shifted gilt $c = 0.9$
+\section*{Aufgabe 2}
+Ausgehend von der Aufgabenstellung sei definiert $k := max(n,m)$\\
+sowie $s := b^k$\\
+Ferner sei der Text $t$ wie Folgt definiert $t := {ab^{k-1}}^p$ für $p >= 1; p \in \mathbb{N}$\\
+Daraus folgt, dass die Anzahl der Vergleiche exakt $ = k + 2 * \sum_{i=1}^{k} i = k+k(k+1)=2k+k^2 >= c * (|t|*|s|) > (c * 3k^2) $ mit $c = \frac{1}{3}$, q.e.d
 
-\section*{Aufgabe 1}%U
-
-\section*{Aufgabe 2}%U
 
 \section*{Aufgabe 3}%T
 Die \textit{extended bad character Rule} Tabelle wird als zweidimensionales int Array der Größe $m\cdot |\Sigma|$ dargestellt. Das
