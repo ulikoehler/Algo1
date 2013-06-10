@@ -110,5 +110,10 @@ $t_{i+j} = a$, dann muss $ebc[j,a']$ aufgerufen werden, wobei gilt $a=\Sigma[a']
 
 
 \section*{Aufgabe 4}%T
-
+Laut Lemma 2.24 können für ein Wort $s\in \Sigma^{m'}$ die Z-Werte $Z_i$ für $i\in [1 : m'-1]$ mit
+maximal $2m'-2$ Zeichenvergleichen bestimmt werden. In diesem Fall ist $m'=m+n+1$, also werden maximal $2\cdot(m+n+1)-2 = 2\cdot(m+n)$ Vergleiche
+ausgeführt. Nun betrachten wir alle Z-Werte $Z_i$ und merken uns die Werte $i-m-1$, sodass $Z_i=m$, denn diese Werte sind die Startindezes für alle
+Vorkommen von $s$ in $t$. Dies gilt, da $m$ ein Präfix von $s\$t$ ist und dann: $(Z_i = m) \Leftrightarrow (s_i...s_{i+Z_i-1} = s_0...s_{m-1} = s)$.
+Dies erfordert nochmals $n+m+1$ Operationen. Insgesamt kommt man auf $2\cdot(m+n)+m+n+1 = 3\cdot(m+n)+1\in \mathcal{O}(n+m)$ Zeit, um festzustellen,
+wo überall $s$ in $t$ als Teilwort auftritt. (http://www.cs.umd.edu/class/fall2011/cmsc858s/Lec02-zalg.pdf)
 \end{document}
