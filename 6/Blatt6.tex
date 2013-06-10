@@ -12,7 +12,7 @@
 \usepackage{listings}
 \usepackage{textcomp}
 \usepackage{amsmath}
-\usepackage{lipsum}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{lipsum}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{mathtools}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -22,7 +22,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern} %Latin modern = enhanced CM font
 \usepackage{xspace} %Space enhancements
-\usepackage{algorithm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{algorithmic}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{algpseudocode}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -62,12 +63,52 @@
 
 \maketitle
 
-\section*{Aufgabe 1}
-%U
-\section*{Aufgabe 2}
-%U
-\section*{Aufgabe 3}
-%T
-\section*{Aufgabe 4}
-%T
+\section*{Aufgabe 1}%U
+
+\section*{Aufgabe 2}%U
+
+\section*{Aufgabe 3}%T
+Die \textit{extended bad character Rule} Tabelle wird als zweidimensionales int Array der Größe $m\cdot |\Sigma|$ dargestellt. Das
+Alphabet wird der Funktion übergeben. Anmerkung: Sei ein Mismatch an Position $j\in [0:m-1]$ in $s$ mit
+$t_{i+j} = a$, dann muss $ebc[j,a']$ aufgerufen werden, wobei gilt $a=\Sigma[a']$.\newline
+\begin{algorithmic}
+\Function{compute\_ebc}{int[][] $ebc$, int $m$, char[] $s$, char[] $\Sigma$}
+\State $ebc[s][length(\Sigma)]$;
+\State $ebc[0][length(\Sigma)] := -1$;//Vor $s_0$ kann kein $c\in \Sigma$ vorkommen
+\For{(int $i := 1$; $i< m$; $i ++$)}
+  \For{(int $j := 0$; $j < length(\Sigma)$; $j ++$)}
+    \If{($s[i-1]==\Sigma[j]$)}
+      \State $ebc[i][j] := i-1$;
+    \Else
+      \State $ebc[i][j] := ebc[i-1][j]$;
+    \EndIf
+  \EndFor
+\EndFor
+\EndFunction
+\end{algorithmic}
+
+\begin{itemize}
+ \item \textit{Laufzeit:} Die Initialisierung von $ebc[][]$ in der ersten Zeile benötigt genau $m\cdot |\Sigma|$ Operationen. In der zweiten Zeile
+ wird die Spalte mit Index 0 von $ebc[][]$ initialisiert, was $|\Sigma|$ Operationen benötigt. In den beiden folgenden for-Schleifen werden
+ mit der Überprüfung der Bedinung der if-Abfrage und den Array-Zuweisungen, von denen entweder die im if- bzw. die im else-Teil ausgeführt
+ wird nur Operationen mit konstanter Laufzeit ausgeführt. Die beiden for-Schleifen laufen insgesammt $|\Sigma| \cdot (m-1)$ mal. Insgesamt
+ werden also $2\cdot m\cdot |\Sigma|\in \mathcal{O}(m\cdot |\Sigma|)$ Operationen durchgeführt.
+ \item \textit{Korrektheit:} Der Algorithmus betrachtet der Reihe nach alle $s_0,s_1,...,s_{m-2},s_{m-1}$. Für den ersten Buchstaben in $s$,
+ also $s_0$, wird in der ersten Spalte von $ebc$ die Zahl $-1$ eingetragen, denn vor $s_0$ kann kein anderer Buchstabe vorkommen.
+ Für alle anderen Buchstaben wird über das Alphabet iteriert und geprüft, ob der gerade betrachtete Buchstabe $s_i$ gleich dem $j$-ten Buchstaben
+ von $\Sigma$ ist:
+  \begin{itemize}
+   \item Fall ($s[i-1]==\Sigma[j]$): Dann ist das das rechteste Vorkommen von $a:=\Sigma[j]$ in $s_0...s_{i-1}$ an der Stelle $s_{i-1}$, also ist
+   $ebc[i][j] = i-1$.
+   \item Fall ``else'': ($s[i-1]\neq \Sigma[j]$): Dann ist das rechteste Vorkommen von $a:=\Sigma[j]$ in $s_0...s_{i-1}$ das rechteste Vorkommen
+   von $a$ in in $s_0...s_{i-2}$, also kann der Wert von $ebc[i-1][j]$ übernommen werden. Folglich ist $ebc[i][j] = ebc[i-1][j]$. Ist $a$ bis zur
+   Position $i-1$ noch nie vorgekommen, so wird $-1$ aus der ersten Spalte übernommen.
+  \end{itemize}
+  Da die gesamte $ebc$-Tabelle auf diese Weise gefüllt wird, gibt sie für jedes $a\in \Sigma$ und $j\in [0:m-1]$ den korrekten Shift gemäß der
+  \textit{extended bad character Rule} Definition wieder.
+\end{itemize}
+
+
+\section*{Aufgabe 4}%T
+
 \end{document}
