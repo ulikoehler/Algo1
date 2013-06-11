@@ -70,6 +70,7 @@ Definition des Textes: $t_n = b^{10\cdot o}$\\
 Daraus folgt $c = 0.9$\\
 Da der Mismatch immer an der ersten Stelle von s auftritt, kann jeweils nur um 1 geshiftet werden.
 Da $|s| = 0.1*|t|$ gilt, und Boyer-Moore um $|s|$ weniger shifted gilt $c = 0.9$
+
 \section*{Aufgabe 2}
 Ausgehend von der Aufgabenstellung sei definiert $k := max(n,m)$\\
 sowie $s := b^k$\\
@@ -123,7 +124,10 @@ $t_{i+j} = a$, dann muss $ebc[j,a']$ aufgerufen werden, wobei gilt $a=\Sigma[a']
 Laut Lemma 2.24 können für ein Wort $s\in \Sigma^{m'}$ die Z-Werte $Z_i$ für $i\in [1 : m'-1]$ mit
 maximal $2m'-2$ Zeichenvergleichen bestimmt werden. In diesem Fall ist $m'=m+n+1$, also werden maximal $2\cdot(m+n+1)-2 = 2\cdot(m+n)$ Vergleiche
 ausgeführt. Nun betrachten wir alle Z-Werte $Z_i$ und merken uns die Werte $i-m-1$, sodass $Z_i=m$, denn diese Werte sind die Startindezes für alle
-Vorkommen von $s$ in $t$. Dies gilt, da $m$ ein Präfix von $s\$t$ ist und dann: $(Z_i = m) \Leftrightarrow (s_i...s_{i+Z_i-1} = s_0...s_{m-1} = s)$.
-Dies erfordert nochmals $n+m+1$ Operationen. Insgesamt kommt man auf $2\cdot(m+n)+m+n+1 = 3\cdot(m+n)+1\in \mathcal{O}(n+m)$ Zeit, um festzustellen,
-wo überall $s$ in $t$ als Teilwort auftritt. (http://www.cs.umd.edu/class/fall2011/cmsc858s/Lec02-zalg.pdf)
+Vorkommen von $s$ in $t$. Dies gilt, da $s$ das Präfix der Länge $m$ von $s\$t$ ist und dann: $(Z_i = m) \Leftrightarrow ((s\$t)_i...(s\$t)_{i+Z_i-1} = (s\$t)_0...(s\$t)_{Z_i-1}= (s\$t)_0...(s\$t)_{m-1} = s)$,
+denn die Definition des $Z$-Werts $Z_i$ ist die Länge des längsten Substring $(s\$t)_i...(s\$t)_{i+Z_i-1}$, der gleich dem Präfix $(s\$t)_0...(s\$t)_{Z_i-1}$ ist.
+In dem Fall ist das Präfix gleich $s$, also ist jede zu $Z_i=m$ korrespondierende $Z$-Box gleich $s$.
+\newline Die Überprüfung, ob $Z_i=m$  $\forall i\in[0:n+m]$ erfordert nochmals $n+m+1$ Operationen, da $s\$t$ $m+1+n$ Zeichen lang ist und es ebenso viele $Z$-Werte gibt.
+Insgesamt kommt man auf $2\cdot(m+n)+m+n+1 = 3\cdot(m+n)+1\in \mathcal{O}(n+m)$ Zeit, um festzustellen, wo überall $s$ in $t$ als Teilwort auftritt.
+(http://www.cs.umd.edu/class/fall2011/cmsc858s/Lec02-zalg.pdf)
 \end{document}
