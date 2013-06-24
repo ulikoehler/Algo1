@@ -65,7 +65,52 @@
 \section*{Aufgabe 1}
 %U%
 \section*{Aufgabe 2}
-%T%
+\begin{algorithmic}
+ \Function{int $find$}{String $s$, String $t$}
+  \State SuffixTree $st$ = $buildSuffixTree$($t$); //Erzeugt einen Suffix-Baum
+  \State Node $node$ = $getRoot$($t$);
+  \State Edge $edge$ = $firstEdge$($node$);
+  \State int $p$ = 0; //Die Position, an der $s$ verglichen wird
+  \While{($node$ $\neq$ null AND $edge$ $\neq$ null)}
+    \State $edge$ = $firstEdge$($node$);
+    \While{($edge$ $\neq$ null)}
+      \State (int, int) $label$ = $getEdgeLabel$($edge$); //int-Tupel
+      \If{($s_{p..p+(label[1]-label[0]+1)}$ == $t_{label[0]..label[1]}$)} *
+	\State $p$ := $p+(label[1]-label[0]+1)$; **
+	\State break; //gehe aus while-schleife heraus
+      \EndIf
+      \State $edge$ = $nextEdge$($node$, $edge$);//Betrachte nächstes Label
+    \EndWhile
+    \If{($p\geq |s|$)}
+    \State break;
+    \Else
+    \State $node$ = $getChild$($edge$); ***
+    \EndIf
+  \EndWhile
+  \If{($p \geq length(s)$)}
+    \State return $tiefenSuche(node)$;****
+  \Else
+    \State return 0;
+  \EndIf
+ \EndFunction
+\end{algorithmic}
+*//Falls $s$ und $t$ an geg. Pos. übereinstimmen\newline
+**//erhöhe Pos. an der $s$ mit Label verglichen wird\newline
+***//Falls passende Kante gefunden, gehe eine Ebene tiefer\newline
+****//Zählt die Blätter des Teilbaums mit Wurzel $node$ == Anzahl der Vorkommen von $s$ in $t$ (vgl. Skript 3.4)\newline
+
+\begin{itemize}
+ \item Laufzeit: Zuerst wird der Suffix Tree berechnet (SuffixTree $st$ = $buildSuffixTree$($t$)), was nach Theorem 3.16/3.17 in linearer
+ Zeit geschehen kann. Dann kommen im Wesentlichen zwei ineinandergeschachtelte while-Schleifen vor, die im schlechtesten Fall alle
+ Kanten eines Knotens besuchen. Der Suffix Tree von $t$ hat maximal $2\cdot |t|$ Knoten, also werden echt weinger als $2\cdot |t|-1$ Kanten besucht,
+ weil pro Ebene maximal ein Knoten besucht wird. Bei jedem Kantenbesuch werden Zeichenvergleiche zwischen $s$ und $t$ ausgeführt, aber maximal
+ $|s|$ Vergleiche, da $|s| \leq |t|$. Also beinhalten die beiden while-Schleifen eine Komplexität, die in $\mathcal{O}(|s| \cdot |t|)$ liegt.
+ Die anschließende Tiefensuche durchläuft max. $\mathcal{O}(|t|)$ Kanten. Also insgesamt $\mathcal{O}(|s| \cdot |t|)$, was aber nicht die effizienteste
+ Methode ist.
+ 
+ \item Korrektheit: sgwef
+\end{itemize}
+
 \section*{Aufgabe 3}
 %T
 
