@@ -106,9 +106,14 @@
  weil pro Ebene maximal ein Knoten besucht wird. Bei jedem Kantenbesuch werden Zeichenvergleiche zwischen $s$ und $t$ ausgeführt, aber maximal
  $|s|$ Vergleiche, da $|s| \leq |t|$. Also beinhalten die beiden while-Schleifen eine Komplexität, die in $\mathcal{O}(|s| \cdot |t|)$ liegt.
  Die anschließende Tiefensuche durchläuft max. $\mathcal{O}(|t|)$ Kanten. Also insgesamt $\mathcal{O}(|s| \cdot |t|)$, was aber nicht die effizienteste
- Methode ist.
+ Methode ist. 
  
- \item Korrektheit: sgwef
+ \item Korrektheit: Der Algorithmus betrachtet von der Wurzel ausgehend jede Kante eines einzigen Knotens pro Ebene. Stimmt der zum Label einer Kante
+ korrespondierende Substring aus $t$ mit $s$ vollständig überein, so wird die Anzahl der Blätter des von diesem Knoten beschriebenen Teilbaums in der
+ Tiefensuche festgestellt. Stimmt $s$ nur zu einer Position $p$ < $|s|$ mit dem dem Label korrespondierende Substring aus $t$ überein, so wird der Knoten
+ aufgesucht, zu dem diese Kante führt, und das Label gesucht, das $s$ weiter vervollständigt. Ist das der Fall, wird wie oben die Tiefensuche durchgeführt.
+ Ist $s$ kein Substring von $t$, dann existiert kein Pfad von der Wurzel zu einem Knoten bzw ``in eine Kante'', und die Position $p$ wird immer echt
+ kleiner als $|s|$ bleiben.
 \end{itemize}
 
 \section*{Aufgabe 3}
