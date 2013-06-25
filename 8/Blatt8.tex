@@ -63,7 +63,7 @@
 
 \maketitle
 \section*{Aufgabe 1}
-%U%
+Siehe Zeichnung
 \section*{Aufgabe 2}
 \begin{algorithmic}
  \Function{int $find$}{String $s$, String $t$}
@@ -117,6 +117,20 @@
 \end{itemize}
 
 \section*{Aufgabe 3}
-%T
+Wenn ein Teilwort $w$ genau zweimal in einem Text $t$ vorkommt, dann kann man $w$ in einem Pfad von der Wurzel über weniger als $|t|$ (== max. Höhe des Baums)
+Kanten zu einem inneren Knoten $kv$ verfolgen, von dem aus genau zwei Blätter zu erreichen sind (vgl. Skript 3.4). Diese Blätter müssen unmittelbar nebeneinander liegen,
+es kann kein Blatt geben, das ``zwischen'' ihnen liegt. Also liegt es nahe, paarweise benachbarten Blätter $B_i$, $B_j$ zu betrachten, und deren kleinsten gemeinsamen Vater zu finden,
+d.h. von oben betrachtet der letzte Knoten, von dem aus $B_i$, $B_j$ erreichbar sind. Dieser ist genau der oben genannte innere Knoten $kv$(, oder u.U. auch die Wurzel). Man zählt
+nun die ``Länge'' der Label der Kanten von $kv$ bis zur Wurzel und wählt daraus das Maximum.\newline
+Zur \textbf{Korrektheit:} Die Aussage, die aus Kapitel 3.4 stammt wird als bewiesen angesehen. Wenn ein Teilwort $w$ genau zweimal vorkommt, dann gibt es einen inneren Knoten, nennen
+wir ihn $kv$, von dem aus genau zwei Blätter $B_i$, $B_j$ erreichbar sind. Des weiteren müssen diese beiden Blätter $B_i$, $B_j$ unmittelbar nebeneinander liegen, denn angenommen es
+gäbe ein Blatt $B_{i'}$, das zwischen $B_i$, $B_j$ liegt, dann wäre $w$ dreimal und nicht genau 2-mal erreichbar. Wenn die Annahme, dass die beiden Blätter unmittelbar nebeneinander
+liegen verwendet wird, dann kann man die zu ihnen führenden Pfade nach oben verfolgen, bis man auf den kleinsten gemeinsamen Vater trifft, der per Definition gleich $kv$ sein muss,
+denn nur von diesem inneren Knoten aus können $B_i$ und $B_j$ spätestens erreicht werden. Führt man dieses Verfahren für alle benachbarten Blätter durch, so findet man spätestens mit
+der Wurzel deren kgVater $kv$. Wenn man von $kv$ den direkten Pfad zur Wurzel verfolgt, dann wird das längste Teilwort $w$, das genau 2-mal vorkommt durch den längsten Pfad,
+gemessen an der ``Länge'' der Labels, beschrieben.\newline
+Zur \textit{Laufzeit:} Ein Suffixbaum $S_t$ für einen Text $t$ hat genau $|t|$ Blätter. Daher gibt es $t-1$ Paare an benachbarten Blättern. Von jedem Blatt wird letztendlich der Pfad
+zur Wurzel verfolgt, der maximal $|t|$ lang sein kann, also liegt die Laufzeit in $\mathcal{O}(|t|^2)$
+
 
 \end{document}
