@@ -63,11 +63,23 @@
 
 \maketitle
 \section*{Aufgabe 1}
-%U%
+Siehe Zeichnung auf Blatt 1
 \section*{Aufgabe 2}
-%U%
+Siehe Zeichnung auf Blatt 2.1 und 2.2
 \section*{Aufgabe 3}
-%T
+Siehe Zeichnung Blatt 3
 \section*{Aufgabe 4}
-%T
+Gegeben $w \in \Sigma^m$
+  \subsection*{a)}
+  Alle Z-Werte positiv: dann ist $w = c^m$ für ein festes, aber beliebiges $c \in \Sigma$, d.h. $w$ ist z.B. ``$\underbrace{aaaa...aaa
+  }_{m-mal}$''. Dann sind alle Z-Werte $Z_i$ gleich $m-i$, was echt größer 0 ist, da $i \leq m-1$. Angenommen ein $w \in \Sigma^m$ besteht
+  aus mehr als einem einzigen, sich wiederholenden $c \in \Sigma$, z.B. ``aaabaaaa'', dann ist $Z_3=0$, da $w_0 = a \neq  b=w_3$. Es ist
+  dabei unerheblich, wo und wie oft ein unterschiedlicher Buchstabe eingefügt wird, der Z-Wert wird mindestens für diese Stelle 0 und ist
+  somit nicht echt positiv.
+  \subsection*{b)}
+  Genau ein Z-Wert ist 0: Hier lässt sich das obige Beispiel ``aaa...aabaaa...aaaa'' verwenden, in dem $w = c^+c'c^+ | c^+c'$ mit
+  $c$, $c' \in \Sigma^m$ und $c \neq c'$ ist. Also entweder wie oben, oder ``aaa...aab''. Wenn $c'$ an der Stelle
+  $w_i$ steht, dann ist $Z_i=0$, und nur an dieser Stelle, da an jeder anderen Position mindestens $w_0 = a = w_j$ gilt, für $j \neq i$.
+  Angenommen an einer anderen Position $j \neq i$ und $j \neq 0$ stünde ``b'', dann wäre $Z_j$ ebenfalls gleich 0. Also darf es nur eine
+  einzige Position $i>0$ und $i<m$ geben, an der ``b'' bzw. allgemein $c'$ steht, wenn an allen anderen Positionen ``a'' bzw. $c$ steht.
 \end{document}
